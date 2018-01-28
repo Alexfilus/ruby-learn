@@ -1,14 +1,13 @@
 puts "Введите стороны A, B, C через запятую: "
 
-a, b, c = gets.split(',').map {|item| item.to_f}.sort.reverse
+sides = gets.split(',').map(&:to_f).sort
 
-if a ** 2 == b ** 2 + c ** 2
+if sides[2] ** 2 == sides[0] ** 2 + sides[1] ** 2
   puts "Треугольник прямоугольный"
 end
 
-if b == c || a == c || a == b
+if sides.uniq.size == 2
   puts "Треугольник равнобедренный"
-  if b == c && a == c && a == b
-    puts "Треугольник равносторонний"
-  end
+elsif sides.uniq.size == 1
+  puts "Треугольник равносторонний"
 end
