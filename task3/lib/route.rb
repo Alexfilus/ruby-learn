@@ -12,6 +12,6 @@ class Route
   end
 
   def delete_station(station)
-    @stations.delete(station) if @stations[1..-2].include?(station)
+    @stations.delete(station) unless @stations[0] == station || @stations[-1] == station
   end
 end

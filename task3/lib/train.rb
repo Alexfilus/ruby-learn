@@ -16,16 +16,16 @@ class Train
     @speed = 0
   end
 
-  def is_moving?
+  def moving?
     @speed != 0
   end
 
   def hook_wagon
-    @count_of_wagons += 1 unless is_moving?
+    @count_of_wagons += 1 unless moving?
   end
 
   def unhook_wagon
-    @count_of_wagons -= 1 unless is_moving? && @count_of_wagons == 0
+    @count_of_wagons -= 1 unless moving? || @count_of_wagons == 0
   end
 
   def set_route(route)
@@ -55,11 +55,10 @@ class Train
   end
 
   def go_to_previous_station
-    unless start_station?
-      current_station.delete_train(self)
-      @current_station_index -= 1
-      current_station.add_train(self)
-    end
+    return if start_station?
+    current_station.delete_train(self)
+    @current_station_index -= 1
+    current_station.add_train(self)
   end
 
   def next_station
