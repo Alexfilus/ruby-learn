@@ -47,11 +47,10 @@ class Train
   end
 
   def go_to_next_station
-    unless finish_station?
-      current_station.delete_train(self)
-      @current_station_index += 1
-      current_station.add_train(self)
-    end
+    return if finish_station?
+    current_station.delete_train(self)
+    @current_station_index += 1
+    current_station.add_train(self)
   end
 
   def go_to_previous_station
